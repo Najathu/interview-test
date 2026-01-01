@@ -6,7 +6,7 @@ import '../services/connectivity_service.dart';
 import 'service_providers.dart';
 import 'package:uuid/uuid.dart';
 
-// Task State
+// State class for managing tasks
 class TaskState {
   final List<Task> tasks;
   final bool isLoading;
@@ -39,7 +39,7 @@ class TaskState {
   }
 }
 
-// Task Notifier
+// Main notifier for task operations
 class TaskNotifier extends StateNotifier<TaskState> {
   final LocalStorageService _localStorageService;
   final ApiService _apiService;
@@ -66,7 +66,7 @@ class TaskNotifier extends StateNotifier<TaskState> {
     });
   }
 
-  // Load tasks from local storage
+  // Load all tasks from Hive
   Future<void> loadTasks() async {
     state = state.copyWith(isLoading: true, clearError: true);
     try {
@@ -80,7 +80,7 @@ class TaskNotifier extends StateNotifier<TaskState> {
     }
   }
 
-  // Fetch tasks from API (replaces all local tasks)
+  // Fetch demo tasks from API - clears local storage first
   Future<void> fetchTasksFromApi() async {
     if (!_connectivityService.isConnected) {
       state = state.copyWith(error: 'No internet connection', isLoading: false);

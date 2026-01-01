@@ -156,20 +156,6 @@ class TaskCard extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  // Sync indicator
-                  if (!task.isSynced)
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: AppTheme.warningColor.withOpacity(0.2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.cloud_off,
-                        color: AppTheme.warningColor,
-                        size: 20,
-                      ),
-                    ),
                 ],
               ),
             ),

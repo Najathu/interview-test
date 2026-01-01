@@ -8,7 +8,7 @@ import '../widgets/empty_state.dart';
 import '../widgets/loading_overlay.dart';
 import 'add_edit_task_screen.dart';
 
-// Theme mode provider
+// Global theme provider - defaults to dark mode
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.dark);
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -90,7 +90,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
       appBar: AppBar(
         title: Column(
           children: [
-            const Text('Smart Task Manager'),
+            const Text('Smart Task Manager', style: TextStyle(fontSize: 20)),
             connectivityStatus.when(
               data: (isConnected) => Row(
                 mainAxisSize: MainAxisSize.min,
@@ -106,15 +106,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     ),
                   ),
                   const SizedBox(width: 6),
-                  Text(
-                    isConnected ? 'Online' : 'Offline',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isConnected
-                          ? AppTheme.successColor
-                          : AppTheme.errorColor,
-                    ),
-                  ),
+
                   if (unsyncedCount > 0) ...[
                     const SizedBox(width: 8),
                     Container(
@@ -184,14 +176,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               },
               tooltip: 'Delete all tasks',
             ),
-          // Sync button
-          IconButton(
-            icon: const Icon(Icons.sync),
-            onPressed: () {
-              ref.read(taskProvider.notifier).fetchTasksFromApi();
-            },
-            tooltip: 'Fetch demo tasks from API',
-          ),
           // Theme toggle
           IconButton(
             icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),

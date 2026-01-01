@@ -43,3 +43,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Personal notes (not for submission)
+HUMAN_TOUCH.md
+IMPLEMENTATION_SUMMARY.md
+QUICK_START.md
+

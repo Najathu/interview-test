@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import '../models/task_model.dart';
 
 class ApiService {
+  // TODO: maybe add custom exceptions later
   final Dio _dio;
   static const String _baseUrl = 'https://jsonplaceholder.typicode.com';
 

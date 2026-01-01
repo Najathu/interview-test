@@ -9,11 +9,11 @@ import 'presentation/screens/home_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize local storage
+  // Init Hive before running the app
   final localStorageService = LocalStorageService();
   await localStorageService.init();
 
-  // Set system UI overlay style
+  // Make status bar transparent
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
