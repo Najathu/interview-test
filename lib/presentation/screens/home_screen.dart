@@ -106,28 +106,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     ),
                   ),
                   const SizedBox(width: 6),
-
-                  if (unsyncedCount > 0) ...[
-                    const SizedBox(width: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppTheme.warningColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        '$unsyncedCount unsynced',
-                        style: const TextStyle(
-                          fontSize: 10,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
                 ],
               ),
               loading: () => const SizedBox.shrink(),
@@ -405,7 +383,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               );
             },
             onToggle: () {
-              ref.read(taskProvider.notifier).toggleTaskCompletion(task);
+              // Show confirmation dialog only when marking as complete
+              if (!task.isCompleted) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Mark as Complete?'),
+                    content: Text(
+                      'Are you sure you want to mark "${task.title}" as complete?',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('Cancel'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          ref
+                              .read(taskProvider.notifier)
+                              .toggleTaskCompletion(task);
+                        },
+                        child: const Text('Complete'),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                // If already completed, just toggle back without confirmation
+                ref.read(taskProvider.notifier).toggleTaskCompletion(task);
+              }
             },
             onDelete: () {
               ref.read(taskProvider.notifier).deleteTask(task.id);
