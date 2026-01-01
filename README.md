@@ -113,15 +113,7 @@ The app follows the Model-View-ViewModel (MVVM) architectural pattern:
 3. **Sync Queue**: Unsynced tasks are tracked and synced when online
 4. **Conflict Resolution**: Server data takes precedence during sync
 
-### State Management Flow
 
-```
-User Action → Provider Notifier → Local Storage → UI Update
-                    ↓
-              (if online)
-                    ↓
-              API Service → Update Sync Status
-```
 
 ## 🔄 Offline Sync Logic
 
@@ -204,29 +196,3 @@ The app uses JSONPlaceholder API for demonstration:
 - [ ] Multi-device sync
 - [ ] Localization support
 
-## 📄 License
-
-This project is created for interview purposes.
-
-## 👨‍💻 Author
-
-Built with ❤️ using Flutter
-
----
-
-## 📸 Screenshots
-
-The app features:
-- Beautiful gradient cards
-- Smooth animations
-- Dark/Light theme support
-- Intuitive swipe gestures
-- Real-time sync status
-- Clean, modern UI
-
-## 🙏 Acknowledgments
-
-- Flutter team for the amazing framework
-- Riverpod for excellent state management
-- Hive for fast local storage
-- JSONPlaceholder for the test API
